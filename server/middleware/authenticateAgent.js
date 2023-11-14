@@ -10,7 +10,7 @@ const authenticateAgent = async (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'verysecretkey');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const agent = await Agent.findById(decoded.agent);
 
     if (!agent) {

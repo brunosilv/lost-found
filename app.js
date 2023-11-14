@@ -9,6 +9,9 @@ const PORT = 3000;
 // Set up Express.
 require('./server/setup/express')(app);
 
+// Set up environment variables.
+require('dotenv').config();
+
 // Set up MongoDB.
 require('./server/setup/mongoose')();
 
