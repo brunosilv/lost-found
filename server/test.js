@@ -1,13 +1,12 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('/home/bruno/development/lost-found/app.js'); // weird issue with path
-
+const app = require('../app');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Airport Lost and Found API Tests', () => {
   let authToken;
-
+  let productId;
   // Test the login route
   describe('POST /agent/login', () => {
     it('should return a valid token on successful login', (done) => {
@@ -55,6 +54,58 @@ describe('Airport Lost and Found API Tests', () => {
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(401);
+          done();
+        });
+    });
+  });
+
+  // Test the list products route
+  describe('GET /product', () => {
+    it('should return a list of products', (done) => {
+      chai.request(app)
+        .get('/product')
+        .set('Authorization', `Bearer ${authToken}`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
+
+  // Test the create product route
+  describe('POST /product', () => {
+    it('should create a new product', (done) => {
+      const newProduct = {
+        name: 'Laptop',
+        description: 'Lost laptop',
+        color: 'Silver',
+        brand: 'Dell',
+        lostTime: '2023-11-14T10:30:00Z',
+      };
+
+      chai.request(app)
+        .post('/product')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(newProduct)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          productId = res.body._id;
+          done();
+        });
+    });
+  });
+
+  // Test the delete product route
+  describe('DELETE /product/:productId', () => {
+    it('should delete an existing product', (done) => {
+      chai.request(app)
+        .delete(`/product/${productId}`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
           done();
         });
     });

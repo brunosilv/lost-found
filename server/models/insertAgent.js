@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Agent = require('./agent');
 
 async function insertSampleAgent() {

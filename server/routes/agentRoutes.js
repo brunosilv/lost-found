@@ -1,6 +1,6 @@
-// routes/agentRoutes.js
 const express = require('express');
-const agentController = require('../controllers/agentController');
+
+const { agentController } = require('../controllers');
 const authenticateAgent = require('../middleware/authenticateAgent');
 
 const router = express.Router();
