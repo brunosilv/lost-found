@@ -11,6 +11,9 @@ router.get('/', authenticateAgent, productController.listProducts);
 // Create a new product
 router.post('/', authenticateAgent, productController.createProduct);
 
+// Update a product
+router.put('/:productId', authenticateAgent, productController.updateProduct);
+
 // Delete a product
 router.delete('/:productId', authenticateAgent, productController.deleteProduct);
 

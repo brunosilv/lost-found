@@ -97,6 +97,27 @@ describe('Airport Lost and Found API Tests', () => {
     });
   });
 
+  // Test the update product route
+  describe('PUT /product/:productId', () => {
+    it('should update an existing product', (done) => {
+      const updateData = {
+        status: 'found',
+      };
+  
+      chai.request(app)
+        .put(`/product/${productId}`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(updateData)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body.status).to.equal('found');
+          expect(res.body.updatedTime).to.not.be.null;
+          done();
+        });
+    });
+  });
+
   // Test the delete product route
   describe('DELETE /product/:productId', () => {
     it('should delete an existing product', (done) => {
