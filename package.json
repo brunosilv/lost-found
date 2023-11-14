@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha --recursive --inspect --exit test",
     "test-win": "set NODE_ENV=test&& mocha --recursive --inspect --exit test"
   },
@@ -21,6 +22,7 @@
     "chai": "^4.1.2",
     "eslint": "7.24.0",
     "mocha": "10.0.0",
+    "nodemon": "^3.0.1",
     "sinon": "10.0.1"
   }
 }

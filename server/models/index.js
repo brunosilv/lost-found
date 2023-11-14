@@ -3,4 +3,10 @@
 */
 'use strict';
 
-module.exports = {};
+const Agent = require('./agent');
+const Product = require('./product');
+
+module.exports = {
+    Agent,
+    Product,
+};
