@@ -8,3 +8,5 @@ const productSchema = new mongoose.Schema({
     lostTime: Date,
     status: { type: String, enum: ['lost', 'found', 'claimed'], default: 'lost' },
   });
+
+module.exports = mongoose.model('Product', productSchema);

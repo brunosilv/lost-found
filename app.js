@@ -13,6 +13,7 @@ require('./server/setup/express')(app);
 require('./server/setup/mongoose')();
 
 // Set up routes.
+app.use('/agent', require('./server/routes/agentRoutes'));
 app.use('/', require('./server/routes'));
 
 // Start app.
