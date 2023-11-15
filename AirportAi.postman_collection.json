@@ -7,6 +7,20 @@
 	"item": [
 		{
 			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const test =",
+							"    pm.collectionVariables.get(\"token\");",
+							"console.log(test)",
+							"pm.collectionVariables.set(\"token\", \"token\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -41,7 +55,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTY5OTkyNTg4MywiZXhwIjoxNjk5OTI5NDgzfQ.Ns5D4DvDgkoucNzbzoOWY7ey5u1lPRWBJop3e3Yk4nQ",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -67,7 +81,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwNjQyMiwiZXhwIjoxNzAwMDkyODIyfQ.K1vIvsCB1au0I3uqXnKgJyNBhr5DiLi6NiMb6FQvZxY",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -92,7 +106,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwNjQyMiwiZXhwIjoxNzAwMDkyODIyfQ.K1vIvsCB1au0I3uqXnKgJyNBhr5DiLi6NiMb6FQvZxY",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -126,7 +140,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwMjQyMywiZXhwIjoxNzAwMDg4ODIzfQ.y5SvMMqOsZdqpCk1xbhS_yDIw0rqkKjK48owkrOjFNM",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
@@ -140,7 +154,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/product/6553fdc8a372e43e21da8106",
+					"raw": "http://localhost:3000/product/{{productId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -148,7 +162,7 @@
 					"port": "3000",
 					"path": [
 						"product",
-						"6553fdc8a372e43e21da8106"
+						"{{productId}}"
 					]
 				}
 			},
@@ -161,12 +175,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTY5OTk1MzUwNiwiZXhwIjoxNjk5OTU3MTA2fQ.XZZ3GKnzeEl1fA7V76rHts8sEZcdi7IChD7pKnB6QNo",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/product/65531e69e66500cb73764de7",
+					"raw": "http://localhost:3000/product/{{productId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -174,7 +188,7 @@
 					"port": "3000",
 					"path": [
 						"product",
-						"65531e69e66500cb73764de7"
+						"{{productId}}"
 					]
 				}
 			},
@@ -267,9 +281,32 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "http://localhost:3000/product/search?message=i lost my samsung",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "i lost my samsung"
+						}
+					]
+				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
 		}
 	]
 }
