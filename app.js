@@ -1,6 +1,6 @@
 /**
-* App entrypoint.
-*/
+ * App entrypoint.
+ */
 'use strict';
 
 let app = require('express')();
@@ -20,7 +20,7 @@ app.use('/agent', require('./server/routes/agentRoutes'));
 app.use('/product', require('./server/routes/productRoutes'));
 
 // Start app.
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log('App now listening on port ' + PORT);
 });
 

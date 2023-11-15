@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const agentSchema = new mongoose.Schema({
-    username: String,
-    password: String,
-  });
+  username: String,
+  password: String,
+});
 
-  // Hash the password before saving
+// Hash the password before saving
 agentSchema.pre('save', async function (next) {
   const agent = this;
 
