@@ -29,6 +29,24 @@ const login = async (req, res) => {
   }
 };
 
+const register = async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const newAgent = new Agent({
+      username,
+      password,
+    });
+
+    const savedAgent = await newAgent.save();
+    res.status(201).json(savedAgent);
+  } catch (error) {
+    console.error('Error creating agent:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   login,
+  register,
 };

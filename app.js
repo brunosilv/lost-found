@@ -4,6 +4,7 @@
 'use strict';
 
 let app = require('express')();
+
 const PORT = 3000;
 
 // Set up Express.
@@ -14,6 +15,12 @@ require('dotenv').config();
 
 // Set up MongoDB.
 require('./server/setup/mongoose')();
+
+// Sanitze intputs to prevent NoSQL injections.
+app.use(require('express-mongo-sanitize')());
+
+// Set security HTTP headers.
+app.use(require('helmet')());
 
 // Set up routes.
 app.use('/agent', require('./server/routes/agentRoutes'));

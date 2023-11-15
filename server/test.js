@@ -63,6 +63,44 @@ describe('Airport Lost and Found API Tests', () => {
     });
   });
 
+  // Test the register route
+  describe('POST /agent/register', () => {
+    it('should create a new agent', (done) => {
+      const newAgent = {
+        username: 'newAgent',
+        password: 'newPassword',
+      };
+
+      chai
+        .request(app)
+        .post('/agent/register')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(newAgent)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(201);
+          done();
+        });
+    });
+
+    it('should return an error without a valid token', (done) => {
+      const newAgent = {
+        username: 'newAgent',
+        password: 'newPassword',
+      };
+
+      chai
+        .request(app)
+        .post('/agent/register')
+        .send(newAgent)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(401);
+          done();
+        });
+    });
+  });
+
   // Test the list products route
   describe('GET /product', () => {
     it('should return a list of products', (done) => {
@@ -120,6 +158,31 @@ describe('Airport Lost and Found API Tests', () => {
           expect(res).to.have.status(200);
           expect(res.body.status).to.equal('found');
           expect(res.body.updatedTime).to.not.be.null;
+          done();
+        });
+    });
+  });
+
+  // Test the create product route with invalid lostTime format
+  describe('POST /product', () => {
+    it('should fail to create a new product with invalid lostTime format', (done) => {
+      const invalidProduct = {
+        type: 'Playstation',
+        description: '5',
+        color: 'White',
+        brand: 'Playstation',
+        lostTime: 'invalid-date-format', // Invalid date format
+      };
+
+      chai
+        .request(app)
+        .post('/product')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send(invalidProduct)
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(400);
+          // Add assertions for the response body if needed
           done();
         });
     });
@@ -200,6 +263,100 @@ describe('Airport Lost and Found API Tests', () => {
           expect(res).to.have.status(200);
           done();
         });
+    });
+  });
+
+  describe('End-to-End Search Test', () => {
+    let createdProducts = [];
+    before(async () => {
+      const productsToCreate = [
+        {
+          type: 'Laptop',
+          description: 'Macbook Air',
+          color: 'Silver',
+          brand: 'Apple',
+          lostTime: '2023-11-14T09:00:00Z',
+        },
+        {
+          type: 'Smartphone',
+          description: 'Samsung Galaxy S23',
+          color: 'Black',
+          brand: 'Samsung',
+          lostTime: '2023-11-15T10:30:00Z',
+        },
+        {
+          type: 'Headphones',
+          description: 'Airpods Pro',
+          color: 'White',
+          brand: 'Apple',
+          lostTime: '2023-11-16T12:00:00Z',
+        },
+      ];
+
+      await Promise.all(
+        productsToCreate.map(async (product) => {
+          const res = await chai
+            .request(app)
+            .post('/product')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send(product);
+
+          createdProducts.push(res.body);
+        })
+      );
+    });
+
+    it('should search for products by keywords', (done) => {
+      chai
+        .request(app)
+        .get('/product/search?keywords=Samsung')
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          console.log('🚀 ~ file: test.js:319 ~ .end ~ res:', res.body);
+          expect(res.body.length).to.equal(1);
+          expect(res.body[0].type).to.equal('Smartphone');
+          done();
+        });
+    });
+
+    it('should search for products by message', (done) => {
+      chai
+        .request(app)
+        .get('/product/search?message=I lost my Apple Macbook Air')
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body.length).to.equal(1);
+          expect(res.body[0].description).to.equal('Macbook Air');
+          done();
+        });
+    });
+
+    it('should search for products by lost time range', (done) => {
+      chai
+        .request(app)
+        .get(
+          '/product/search?lostTimeStart=2023-11-14T00:00:00Z&lostTimeEnd=2023-11-16T23:59:59Z'
+        )
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body.length).to.equal(3);
+          done();
+        });
+    });
+
+    // Clean up created products after all tests are done
+    after(async () => {
+      await Promise.all(
+        createdProducts.map(async (product) => {
+          await chai
+            .request(app)
+            .delete(`/product/${product._id}`)
+            .set('Authorization', `Bearer ${authToken}`);
+        })
+      );
     });
   });
 });

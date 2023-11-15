@@ -13,11 +13,11 @@ async function listProducts(req, res) {
 
 // Create a new product
 async function createProduct(req, res) {
-  const { name, description, color, brand, lostTime } = req.body;
+  const { type, description, color, brand, lostTime } = req.body;
 
   try {
     const newProduct = new Product({
-      name,
+      type,
       description,
       color,
       brand,
@@ -100,7 +100,7 @@ async function searchProducts(req, res) {
       query.$and.push({
         $and: messageWords.map((word) => ({
           $or: [
-            { name: { $regex: new RegExp(word, 'i') } },
+            { type: { $regex: new RegExp(word, 'i') } },
             { description: { $regex: new RegExp(word, 'i') } },
             { color: { $regex: new RegExp(word, 'i') } },
             { brand: { $regex: new RegExp(word, 'i') } },
