@@ -12,10 +12,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"const test =",
-							"    pm.collectionVariables.get(\"token\");",
-							"console.log(test)",
-							"pm.collectionVariables.set(\"token\", \"token\");"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -43,6 +40,55 @@
 					"path": [
 						"agent",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const test =",
+							"    pm.collectionVariables.get(\"token\");",
+							"console.log(test)",
+							"pm.collectionVariables.set(\"token\", \"token\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"newAgent\",\n  \"password\": \"newPassword\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/agent/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"agent",
+						"register"
 					]
 				}
 			},
@@ -101,6 +147,17 @@
 		},
 		{
 			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -282,7 +339,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/product/search?message=i lost my samsung",
+					"raw": "http://localhost:3000/product/search?message=i lost my samsung smartphone",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -295,7 +352,7 @@
 					"query": [
 						{
 							"key": "message",
-							"value": "i lost my samsung"
+							"value": "i lost my samsung smartphone"
 						}
 					]
 				}

@@ -313,7 +313,6 @@ describe('Airport Lost and Found API Tests', () => {
         .end((err, res) => {
           expect(err).to.be.null;
           expect(res).to.have.status(200);
-          console.log('🚀 ~ file: test.js:319 ~ .end ~ res:', res.body);
           expect(res.body.length).to.equal(1);
           expect(res.body[0].type).to.equal('Smartphone');
           done();
