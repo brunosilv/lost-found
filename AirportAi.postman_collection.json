@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "3e80f6af-8882-4047-a252-1710cf169d8f",
+		"name": "AirportAi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"testAgent\",\n  \"password\": \"testPassword\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/agent/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"agent",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Secure Route",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTY5OTkyNTg4MywiZXhwIjoxNjk5OTI5NDgzfQ.Ns5D4DvDgkoucNzbzoOWY7ey5u1lPRWBJop3e3Yk4nQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/agent/secure-route",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"agent",
+						"secure-route"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwNjQyMiwiZXhwIjoxNzAwMDkyODIyfQ.K1vIvsCB1au0I3uqXnKgJyNBhr5DiLi6NiMb6FQvZxY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwNjQyMiwiZXhwIjoxNzAwMDkyODIyfQ.K1vIvsCB1au0I3uqXnKgJyNBhr5DiLi6NiMb6FQvZxY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Smartphone\",\n        \"description\": \"Samsung\",\n        \"color\": \"Black\",\n        \"brand\": \"Samsung\",\n        \"lostTime\": \"2023-11-16T09:00:00Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTcwMDAwMjQyMywiZXhwIjoxNzAwMDg4ODIzfQ.y5SvMMqOsZdqpCk1xbhS_yDIw0rqkKjK48owkrOjFNM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"status\": \"found\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/product/6553fdc8a372e43e21da8106",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"6553fdc8a372e43e21da8106"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZ2VudCI6IjY1NTJjYmE4ZTc0ZjZhNjM4ZGFkZjg3NiIsImlhdCI6MTY5OTk1MzUwNiwiZXhwIjoxNjk5OTU3MTA2fQ.XZZ3GKnzeEl1fA7V76rHts8sEZcdi7IChD7pKnB6QNo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/product/65531e69e66500cb73764de7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"65531e69e66500cb73764de7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Product (Keywords)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/product/search?keywords=Purple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "Purple"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Product (Time)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/product/search?lostTime=2023-11-14T09:00:00Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "lostTime",
+							"value": "2023-11-14T09:00:00Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Product (Keywords & Time)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/product/search?keywords=samsung&lostTime=2023-11-16T09:00:00.000Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keywords",
+							"value": "samsung"
+						},
+						{
+							"key": "lostTime",
+							"value": "2023-11-16T09:00:00.000Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Product (Message)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
