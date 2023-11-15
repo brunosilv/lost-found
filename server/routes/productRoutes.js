@@ -15,6 +15,13 @@ router.post('/', authenticateAgent, productController.createProduct);
 router.put('/:productId', authenticateAgent, productController.updateProduct);
 
 // Delete a product
-router.delete('/:productId', authenticateAgent, productController.deleteProduct);
+router.delete(
+  '/:productId',
+  authenticateAgent,
+  productController.deleteProduct
+);
+
+// Search products
+router.get('/search', productController.searchProducts);
 
 module.exports = router;
